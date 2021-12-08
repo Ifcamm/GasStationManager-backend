@@ -9,6 +9,16 @@ exports.getTransactions = (req, res) => {
 	});
 };
 
+exports.getTransactionsByClient = (req, res) => {
+	identification = req.params.identification;
+	if (!identification) {
+		return res.status(401).json({ message: "There is no results" });
+	}
+	Transaction.find({ identification: identification }).then((result) => {
+		res.status(200).json(result);
+	});
+};
+
 //metodo para crear una nueva transaccion (POST)
 exports.newTransaction = (req, res) => {
 	const newTransaction = Transaction({

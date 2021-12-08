@@ -12,8 +12,10 @@ exports.getUsers = (req, res) => {
 
 exports.getUser = (req, res) => {
 	User.findById(req.params.id).then((userResult) => {
+		if (!userResult) {
+			return res.status(200).json({ message: "Usuario no encontrado" });
+		}
 		res.status(200).json(userResult);
-		console.log(userResult);
 	});
 };
 
@@ -27,6 +29,7 @@ exports.signup = (req, res) => {
 			identification: req.body.identification,
 			phoneNumber: req.body.phoneNumber,
 			password: hash,
+			role: req.body.role,
 		});
 
 		newUser
@@ -70,14 +73,18 @@ exports.login = (req, res) => {
 				{
 					identification: userGet.identification,
 					userId: userGet._id,
+					userRole: userGet.role,
 				},
-				"MisionTIC2021_Secret_Token_GSM",
+				process.env.TOKEN_S,
 				{ expiresIn: "1h" }
 			);
 
-			res
-				.status(200)
-				.json({ token: token, expiresIn: 3600, userId: userGet._id });
+			res.status(200).json({
+				token: token,
+				expiresIn: 3600,
+				userId: userGet._id,
+				userRole: userGet.role,
+			});
 
 			// res.status(200).json({ message: "Successful authentication" });
 		})

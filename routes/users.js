@@ -4,14 +4,21 @@ const router = express.Router();
 const checkAuth = require("../middleware/check-auth");
 const usersController = require("../controllers/users");
 const transactionsController = require("../controllers/transactions");
+const checkCreatableRoles = require("../middleware/check-creatable-roles");
+const checkDeleteAction = require("../middleware/check-delete-action");
 
-router.get("", usersController.getUsers);
-router.get("/:id", usersController.getUser);
+router.get("", checkAuth, usersController.getUsers);
+router.get("/:id", checkAuth, usersController.getUser); //consultar usuario por id, devuelve información de usuario en json
 
-router.post("/signup", checkAuth, usersController.signup);
-router.post("/transaction", checkAuth, transactionsController.newTransaction);
+router.post(
+	"/createuser",
+	checkAuth,
+	checkCreatableRoles,
+	usersController.signup
+);
+router.post("/transaction", checkAuth, transactionsController.newTransaction); //registro de nueva transacción
 router.post("/login", usersController.login);
 
-router.delete("/:id", usersController.deleteUser);
+router.delete("/:id", checkAuth, checkDeleteAction, usersController.deleteUser);
 
 module.exports = router;
