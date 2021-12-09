@@ -7,7 +7,7 @@ const transactionsController = require("../controllers/transactions");
 const checkCreatableRoles = require("../middleware/check-creatable-roles");
 const checkDeleteAction = require("../middleware/check-delete-action");
 
-router.get("", checkAuth, usersController.getUsers);
+router.get("", usersController.getUsers);
 router.get("/:id", checkAuth, usersController.getUser); //consultar usuario por id, devuelve información de usuario en json
 
 router.post(
