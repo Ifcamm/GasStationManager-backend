@@ -25,7 +25,7 @@ mongoose
 		console.log("Houston tenemos un problema");
 	});
 
-app.use("/api/clients", clientRoutes);
+// app.use("/api/clients", clientRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/transactions", transactionRoutes);
 

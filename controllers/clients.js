@@ -1,58 +1,58 @@
-const Client = require("../models/client");
+// const Client = require("../models/client");
 
-//metodo para obtener clientes (GET)
-exports.getClients = (req, res) => {
-  Client.find().then((clientResult) => {
-    res.status(200).json(clientResult);
-  })
-};
+// //metodo para obtener clientes (GET)
+// exports.getClients = (req, res) => {
+// 	Client.find().then((clientResult) => {
+// 		res.status(200).json(clientResult);
+// 	});
+// };
 
-//metodo para crear nuevo cliente
-exports.signup = (req, res) => {
-  const newClient = new Client({
-    username: req.body.username,
-    email: req.body.email,
-    identification: req.body.identification,
-    plate: req.body.plate,
-  });
-  
-      newClient
-        .save()
-        .then((result) => {
-          res.status(201).json({ message: "Cliente creado" });
-        })
-        .catch((err) => {
-          res.status(500).json({ error: err });
-        });
-};
+// //metodo para crear nuevo cliente
+// exports.signup = (req, res) => {
+// 	const newClient = new Client({
+// 		username: req.body.username,
+// 		email: req.body.email,
+// 		identification: req.body.identification,
+// 		plate: req.body.plate,
+// 	});
 
-//metodo para eliminar un cliente (DELETE)
+// 	newClient
+// 		.save()
+// 		.then((result) => {
+// 			res.status(201).json({ message: "Cliente creado" });
+// 		})
+// 		.catch((err) => {
+// 			res.status(500).json({ error: err });
+// 		});
+// };
 
-exports.deleteClient = (req, res) => {
-  Client.deleteOne({ _id: req.params.id }).then((result) => {
-    if(result.deletedCount>0){
-      res.status(200).json({message: 'Cliente Eliminado'});
-    } else {
-      res.status(200).json({message: 'Cliente no encontrado'});
-    }
-    console.log(result);
-  });
-};
+// //metodo para eliminar un cliente (DELETE)
 
-//metodo para actualizar un cliente (PUT)
+// exports.deleteClient = (req, res) => {
+// 	Client.deleteOne({ _id: req.params.id }).then((result) => {
+// 		if (result.deletedCount > 0) {
+// 			res.status(200).json({ message: "Cliente Eliminado" });
+// 		} else {
+// 			res.status(200).json({ message: "Cliente no encontrado" });
+// 		}
+// 		console.log(result);
+// 	});
+// };
 
-exports.updateClient = (req, res) => {
-  const id = req.params.id;
-  const client = new Client({
-    _id: id,
-    username: req.body.username,
-    email: req.body.email,
-    identification: req.body.identification,
-    plate: req.body.plate,
-  });
+// //metodo para actualizar un cliente (PUT)
 
-  Client.updateOne({_id : id}, client).then((result) => {
-    console.log(result);
-    res.status(200).json({message: 'Actualizacion exitosa'});
-  });
-};
+// exports.updateClient = (req, res) => {
+// 	const id = req.params.id;
+// 	const client = new Client({
+// 		_id: id,
+// 		username: req.body.username,
+// 		email: req.body.email,
+// 		identification: req.body.identification,
+// 		plate: req.body.plate,
+// 	});
+
+// 	Client.updateOne({ _id: id }, client).then((result) => {
+// 		console.log(result);
+// 		res.status(200).json({ message: "Actualizacion exitosa" });
+// 	});
+// };
