@@ -21,11 +21,11 @@ router.delete(
 	checkDeleteAction,
 	transactionsController.deleteTransaction
 );
-router.put(
-	"/:id",
+router.post(
+	"/newtransaction",
 	checkAuth,
-	checkCreatableRoles,
-	transactionsController.updateTransaction
-);
+	transactionsController.newTransaction
+); //registro de nueva transacción
+router.put("/:id", checkAuth, transactionsController.updateTransaction);
 
 module.exports = router;

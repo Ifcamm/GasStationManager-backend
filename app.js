@@ -4,7 +4,6 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-const clientRoutes = require("./routes/clients");
 const userRoutes = require("./routes/users");
 const transactionRoutes = require("./routes/transactions");
 
@@ -25,7 +24,6 @@ mongoose
 		console.log("Houston tenemos un problema");
 	});
 
-// app.use("/api/clients", clientRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/transactions", transactionRoutes);
 

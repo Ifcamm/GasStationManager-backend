@@ -3,7 +3,6 @@ const router = express.Router();
 
 const checkAuth = require("../middleware/check-auth");
 const usersController = require("../controllers/users");
-const transactionsController = require("../controllers/transactions");
 const checkCreatableRoles = require("../middleware/check-creatable-roles");
 const checkDeleteAction = require("../middleware/check-delete-action");
 
@@ -17,7 +16,7 @@ router.post(
 	usersController.createuser
 );
 router.post("/signup", usersController.signup);
-router.post("/transaction", checkAuth, transactionsController.newTransaction); //registro de nueva transacción
+
 router.post("/login", usersController.login);
 
 router.delete("/:id", checkAuth, checkDeleteAction, usersController.deleteUser);
