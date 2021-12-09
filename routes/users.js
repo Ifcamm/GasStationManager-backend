@@ -10,12 +10,7 @@ const checkDeleteAction = require("../middleware/check-delete-action");
 router.get("", usersController.getUsers);
 router.get("/:id", checkAuth, usersController.getUser); //consultar usuario por id, devuelve información de usuario en json
 
-router.post(
-	"/createuser",
-	checkAuth,
-	checkCreatableRoles,
-	usersController.signup
-);
+router.post("/createuser", checkCreatableRoles, usersController.signup);
 router.post("/transaction", checkAuth, transactionsController.newTransaction); //registro de nueva transacción
 router.post("/login", usersController.login);
 
