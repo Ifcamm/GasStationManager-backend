@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
 			creatableRoles = ["user", "client"];
 		} else creatableRoles = ["client"];
 
-		if (!roles.includes(req.body.role)) {
+		if (!creatableRoles.includes(req.body.role)) {
 			return res.status(401).json({ message: "Unauthorized" });
 		}
 
