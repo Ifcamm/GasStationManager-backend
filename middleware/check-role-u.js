@@ -6,11 +6,11 @@ module.exports = (req, res, next) => {
 		const decodedToken = jwt.verify(token, process.env.TOKEN_S);
 
 		if (
-			decodedToken.userRole === "superuser" ||
-			decodedToken.userRole === "user"
+			decodedToken.userRole === "user" ||
+			decodedToken.userRole === "superuser"
 		) {
 			next();
-		} else return res.status(401).json({ message: "Authentication failed" });
+		} else return res.status(401).json({ message: "Unauthorized" });
 	} catch (err) {
 		res.status(401).json({ message: "Authentication failed" });
 	}

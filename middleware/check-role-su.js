@@ -6,14 +6,8 @@ module.exports = (req, res, next) => {
 		const decodedToken = jwt.verify(token, process.env.TOKEN_S);
 
 		if (decodedToken.userRole === "superuser") {
-			creatableRoles = ["user", "client"];
-		} else creatableRoles = ["client"];
-
-		if (!creatableRoles.includes(req.body.role)) {
-			return res.status(401).json({ message: "Unauthorized" });
-		}
-
-		next();
+			next();
+		} else return res.status(401).json({ message: "Unauthorized" });
 	} catch (err) {
 		res.status(401).json({ message: "Authentication failed" });
 	}

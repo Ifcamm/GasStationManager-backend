@@ -3,12 +3,16 @@ const router = express.Router();
 
 const transactionsController = require("../controllers/transactions");
 const checkAuth = require("../middleware/check-auth");
-const checkCreatableRoles = require("../middleware/check-creatable-roles");
-const checkDeleteAction = require("../middleware/check-delete-action");
-const checkRole = require("../middleware/check-role-su-u");
+const checkRoleUser = require("../middleware/check-role-u");
+const checkRoleSuperUser = require("../middleware/check-role-su");
 const checkUser = require("../middleware/check-user");
 
-router.get("", checkAuth, checkRole, transactionsController.getTransactions);
+router.get(
+	"",
+	checkAuth,
+	checkRoleUser,
+	transactionsController.getTransactions
+);
 router.get(
 	"/:identification",
 	checkAuth,
@@ -18,7 +22,8 @@ router.get(
 router.delete(
 	"/:id",
 	checkAuth,
-	checkDeleteAction,
+	checkRoleUser,
+	checkRoleSuperUser,
 	transactionsController.deleteTransaction
 );
 router.post(

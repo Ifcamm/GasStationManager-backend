@@ -5,7 +5,13 @@ const jwt = require("jsonwebtoken");
 //metodo para obtener todos los usuarios (GET)
 
 exports.getUsers = (req, res) => {
-	User.find().then((userResult) => {
+	User.find({ role: "user" }).then((userResult) => {
+		res.status(200).json(userResult);
+	});
+};
+
+exports.getClients = (req, res) => {
+	User.find({ role: "client" }).then((userResult) => {
 		res.status(200).json(userResult);
 	});
 };
